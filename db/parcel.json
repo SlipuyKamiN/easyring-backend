@@ -5,7 +5,8 @@
       "date": "2025-05-22T00:00:00+02:00",
       "startTime": "2025-05-22T08:00:00+02:00",
       "endTime": "2025-05-22T11:00:00+02:00",
-      "description": "Parcel description"
+      "description": "Parcel description",
+      "distance": "8.08"
     },
     "sender": {
       "phone": "+491781516236",
@@ -122,7 +123,7 @@
       "history": []
     },
     "payment": {
-      "price": 0,
+      "price": 20,
       "type": "cash",
       "transactionId": "",
       "transactionDate": "",
