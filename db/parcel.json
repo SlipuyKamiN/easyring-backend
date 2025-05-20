@@ -1,0 +1,136 @@
+{
+  "newParcel": {
+    "mainInfo": {
+      "size": "S",
+      "date": "2025-05-22T00:00:00+02:00",
+      "startTime": "2025-05-22T08:00:00+02:00",
+      "endTime": "2025-05-22T11:00:00+02:00",
+      "description": "Parcel description"
+    },
+    "sender": {
+      "phone": "+491781516236",
+      "name": "Full Name",
+      "address": {
+        "type": "Feature",
+        "properties": {
+          "country": "Germany",
+          "country_code": "de",
+          "city": "Berlin",
+          "municipality": "Charlottenburg-Wilmersdorf",
+          "postcode": "10589",
+          "suburb": "Charlottenburg",
+          "street": "Osnabrücker Straße",
+          "iso3166_2": "DE-BE",
+          "datasource": {
+            "sourcename": "openstreetmap",
+            "attribution": "© OpenStreetMap contributors",
+            "license": "Open Database License",
+            "url": "https://www.openstreetmap.org/copyright"
+          },
+          "lon": 13.3035057,
+          "lat": 52.52574,
+          "housenumber": "1",
+          "result_type": "building",
+          "formatted": "Osnabrücker Straße 1, 10589 Berlin, Germany",
+          "address_line1": "Osnabrücker Straße 1",
+          "address_line2": "10589 Berlin, Germany",
+          "timezone": {
+            "name": "Europe/Berlin",
+            "offset_STD": "+01:00",
+            "offset_STD_seconds": 3600,
+            "offset_DST": "+02:00",
+            "offset_DST_seconds": 7200,
+            "abbreviation_STD": "CET",
+            "abbreviation_DST": "CEST"
+          },
+          "plus_code": "9F4MG8G3+7C",
+          "plus_code_short": "G8G3+7C Berlin, Germany",
+          "rank": {
+            "confidence": 1,
+            "confidence_street_level": 1,
+            "confidence_building_level": 1,
+            "match_type": "full_match"
+          },
+          "place_id": "51974c5f19659b2a40597a19c5724b434a40f00103f901a7d811b500000000c00203"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [13.3035057, 52.52574]
+        },
+        "bbox": [13.2975624, 52.5264072, 13.298259, 52.5265062]
+      },
+      "email": "email@gmail.com",
+      "comment": "Comment"
+    },
+    "recipient": {
+      "phone": "+491781516236",
+      "name": "Full Name",
+      "address": {
+        "geometry": {
+          "coordinates": [13.3919623, 52.5080839],
+          "type": "Point"
+        },
+        "type": "Feature",
+        "properties": {
+          "country": "Germany",
+          "city": "Berlin",
+          "postcode": "10117",
+          "housenumber": "79",
+          "street": "Charlottenstraße",
+          "district": "Mitte",
+          "datasource": {
+            "sourcename": "openstreetmap",
+            "attribution": "© OpenStreetMap contributors",
+            "license": "Open Database License",
+            "url": "https://www.openstreetmap.org/copyright"
+          },
+          "country_code": "de",
+          "lon": 13.3919623,
+          "lat": 52.5080839,
+          "result_type": "building",
+          "neighbourhood": "Friedrichswerder",
+          "suburb": "Mitte",
+          "iso3166_2": "DE-BE",
+          "state": "Berlin",
+          "state_code": "BE",
+          "formatted": "Charlottenstraße 79, 10117 Berlin, Germany",
+          "address_line1": "Charlottenstraße 79",
+          "address_line2": "10117 Berlin, Germany",
+          "timezone": {
+            "name": "Europe/Berlin",
+            "offset_STD": "+01:00",
+            "offset_STD_seconds": 3600,
+            "offset_DST": "+02:00",
+            "offset_DST_seconds": 7200,
+            "abbreviation_STD": "CET",
+            "abbreviation_DST": "CEST"
+          },
+          "plus_code": "9F4MG95R+6Q",
+          "plus_code_short": "G95R+6Q Berlin, Germany",
+          "rank": {
+            "importance": 0.21000999999999997,
+            "confidence": 0,
+            "match_type": "full_match"
+          },
+          "place_id": "51a6875748afc82a4059e40fabe408414a40f00103f90113858a5c00000000c00203e203406f70656e6164647265737365733a616464726573733a64652f6265726c696e2d6164647265737365732d73746174653a30393634326664626632643732613334"
+        }
+      },
+      "comment": "Comment"
+    },
+    "tracking": {
+      "id": "RR434493",
+      "history": []
+    },
+    "payment": {
+      "price": 0,
+      "type": "cash",
+      "transactionId": "",
+      "transactionDate": "",
+      "isPaid": false
+    },
+    "driver": {
+      "driverName": "",
+      "driverId": ""
+    }
+  }
+}
