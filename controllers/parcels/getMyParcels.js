@@ -1,7 +1,8 @@
 import { ctrlWrapper } from "../../utils/index.js";
-import Cocktail from "../../models/cocktails.js";
+import Cocktail from "../../models/parcels.js";
 
-const getMyRecipes = async (req, res) => {
+// getMyParcels (for driver)
+const getMyParcels = async (req, res) => {
   const { _id: owner } = req.user;
   const { page = 1, limit = 8, ...query } = req.query;
   const skip = (page - 1) * limit;
@@ -22,4 +23,4 @@ const getMyRecipes = async (req, res) => {
   res.json({ totalHits, result });
 };
 
-export default ctrlWrapper(getMyRecipes);
+export default ctrlWrapper(getMyParcels);

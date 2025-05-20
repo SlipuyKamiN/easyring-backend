@@ -5,9 +5,10 @@ import {
   getCurrent,
   logout,
   updateUser,
+  getAllUsers,
 } from "../../controllers/users/index.js";
 import schemas from "../../schemas/userSchema.js";
-import { validateBody, authenticate, upload } from "../../middlewares/index.js";
+import { validateBody, authenticate } from "../../middlewares/index.js";
 
 const router = express.Router();
 
@@ -17,8 +18,10 @@ router.post("/signin", validateBody(schemas.userSigninSchema), login);
 
 router.get("/current", authenticate, getCurrent);
 
-router.post("/logout", authenticate, logout);
+router.get("/users", authenticate, getAllUsers);
 
-router.patch("/user", authenticate, upload.single("avatar"), updateUser);
+router.patch("/user", authenticate, updateUser);
+
+router.post("/logout", authenticate, logout);
 
 export default router;

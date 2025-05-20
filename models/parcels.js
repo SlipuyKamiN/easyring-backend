@@ -2,7 +2,8 @@ import { Schema, model } from "mongoose";
 
 import { handleSaveError, handleUpdateValidate } from "./hooks.js";
 
-const cocktailSchema = new Schema(
+// parcelSchema
+const parcelSchema = new Schema(
   {
     drink: { type: String, required: [true, "Set name for a drink"] },
     description: String,
@@ -99,12 +100,12 @@ const cocktailSchema = new Schema(
   { versionKey: false, timestamps: true }
 );
 
-cocktailSchema.pre("findByIdAndUpdate", handleUpdateValidate);
+parcelSchema.pre("findByIdAndUpdate", handleUpdateValidate);
 
-cocktailSchema.post("save", handleSaveError);
+parcelSchema.post("save", handleSaveError);
 
-cocktailSchema.post("findByIdAndUpdate", handleSaveError);
+parcelSchema.post("findByIdAndUpdate", handleSaveError);
 
-const Cocktail = model("cocktail", cocktailSchema);
+const Parcel = model("parcel", parcelSchema);
 
-export default Cocktail;
+export default Parcel;

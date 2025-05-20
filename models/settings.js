@@ -1,6 +1,7 @@
 import { Schema, model } from "mongoose";
 
-const ingredientSchema = new Schema({
+//settingsSchema
+const settingsSchema = new Schema({
   title: {
     type: String,
     required: true,
@@ -23,6 +24,6 @@ const ingredientSchema = new Schema({
   },
 });
 
-const Ingredient = model("ingredient", ingredientSchema);
+const Setting = model("setting", settingsSchema);
 
-export default Ingredient;
+export default Setting;

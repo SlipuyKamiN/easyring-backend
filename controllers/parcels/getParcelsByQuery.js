@@ -1,7 +1,7 @@
 import { HttpError, ctrlWrapper } from "../../utils/index.js";
-import Cocktail from "../../models/cocktails.js";
+import Cocktail from "../../models/parcels.js";
 
-const getDrinksByQuery = async (req, res) => {
+const getParcelsByQuery = async (req, res) => {
   const { search, category, ingredient, page = 1, limit = 8 } = req.query;
 
   const query = {};
@@ -28,4 +28,4 @@ const getDrinksByQuery = async (req, res) => {
   res.json({ totalHits, drinks });
 };
 
-export default ctrlWrapper(getDrinksByQuery);
+export default ctrlWrapper(getParcelsByQuery);

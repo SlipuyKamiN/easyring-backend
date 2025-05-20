@@ -3,11 +3,8 @@ import logger from "morgan";
 import cors from "cors";
 import fs from "fs/promises";
 import usersRouter from "./routes/api/users.js";
-import subscribeRouter from "./routes/api/subscribe.js";
-import cocktailsRouter from "./routes/api/cocktails.js";
-import myRecipesRouter from "./routes/api/myrecipes.js";
-import ingredientsRouter from "./routes/api/ingredients.js";
-import glassesRouter from "./routes/api/glasses.js";
+import parcelsRouter from "./routes/api/parcels.js";
+import settingsRouter from "./routes/api/settings.js";
 import swaggerUi from "swagger-ui-express";
 import path from "path";
 
@@ -24,11 +21,8 @@ app.use(express.json());
 app.use(express.static("public"));
 
 app.use("/api/auth", usersRouter);
-app.use("/api/subscribe", subscribeRouter);
-app.use("/api/ingredients", ingredientsRouter);
-app.use("/api/recipes", cocktailsRouter);
-app.use("/api/myrecipes", myRecipesRouter);
-app.use("/api/glass", glassesRouter);
+app.use("/api/parcels", parcelsRouter);
+app.use("/api/settings", settingsRouter);
 app.use("/api/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use((req, res) => {

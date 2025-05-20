@@ -1,6 +1,6 @@
 import Joi from "joi";
 
-const cocktailSchema = Joi.object({
+const parcelSchema = Joi.object({
   drink: Joi.string().required().messages({
     "any.required": "The drink field is required",
     "string.empty": "The drink field is required",
@@ -84,5 +84,5 @@ const cocktailSchema = Joi.object({
 });
 
 export default {
-  cocktailSchema,
+  parcelSchema,
 };

@@ -1,11 +1,12 @@
 import { ctrlWrapper } from "../../utils/index.js";
-import Cocktail from "../../models/cocktails.js";
+import Setting from "../../models/settings.js";
 
-const updateFavorites = async (req, res) => {
+// updateSettings (for admin)
+const updateSettings = async (req, res) => {
   const { id } = req.params;
   const { _id: user } = req.user;
 
-  const recipe = await Cocktail.findById(id);
+  const recipe = await Setting.findById(id);
 
   if (!recipe) {
     return res.status(404).json({ error: "Drink with such id is not found" });
@@ -18,12 +19,12 @@ const updateFavorites = async (req, res) => {
   const isFavorite = recipe.users.includes(user);
 
   if (isFavorite) {
-    await Cocktail.findByIdAndUpdate(recipe._id, { $pull: { users: user } });
+    await Setting.findByIdAndUpdate(recipe._id, { $pull: { users: user } });
     res.status(200).json({ message: `Removed ${recipe.drink} from favorites` });
   } else {
-    await Cocktail.findByIdAndUpdate(recipe._id, { $push: { users: user } });
+    await Setting.findByIdAndUpdate(recipe._id, { $push: { users: user } });
     res.status(200).json({ message: `Added ${recipe.drink} to favorites` });
   }
 };
 
-export default ctrlWrapper(updateFavorites);
+export default ctrlWrapper(updateSettings);

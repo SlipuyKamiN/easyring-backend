@@ -1,7 +1,7 @@
 import { ctrlWrapper, HttpError } from "../../utils/index.js";
-import Cocktail from "../../models/cocktails.js";
+import Cocktail from "../../models/parcels.js";
 
-const deleteMyRecipe = async (req, res) => {
+const deleteParcel = async (req, res) => {
   const { id } = req.params;
   const { _id: user } = req.user;
 
@@ -22,4 +22,4 @@ const deleteMyRecipe = async (req, res) => {
   });
 };
 
-export default ctrlWrapper(deleteMyRecipe);
+export default ctrlWrapper(deleteParcel);

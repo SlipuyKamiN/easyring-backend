@@ -1,8 +1,8 @@
 import { HttpError, ctrlWrapper } from "../../utils/index.js";
-import Cocktail from "../../models/cocktails.js";
-import Ingredient from "../../models/ingredients.js";
+import Parcel from "../../models/parcels.js";
+import Setting from "../../models/settings.js";
 
-const addMyRecipe = async (req, res) => {
+const createParcel = async (req, res) => {
   const { _id: owner } = req.user;
   const drinkThumb = req.file.path;
 
@@ -10,7 +10,7 @@ const addMyRecipe = async (req, res) => {
   const ingredientsArray = [];
 
   for (const ingredient of ingredients) {
-    const ingredientData = await Ingredient.findOne({
+    const ingredientData = await Setting.findOne({
       title: ingredient.title,
     });
 
@@ -30,7 +30,7 @@ const addMyRecipe = async (req, res) => {
     });
   }
 
-  const result = await Cocktail.create({
+  const result = await Parcel.create({
     ...req.body,
     owner,
     drinkThumb,
@@ -40,4 +40,4 @@ const addMyRecipe = async (req, res) => {
   res.status(201).json(result);
 };
 
-export default ctrlWrapper(addMyRecipe);
+export default ctrlWrapper(createParcel);
