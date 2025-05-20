@@ -1,16 +1,16 @@
 import { HttpError, ctrlWrapper } from "../../utils/index.js";
-import Cocktail from "../../models/parcels.js";
+import Parcel from "../../models/parcels.js";
 
 const getParcelById = async (req, res) => {
   const { id } = req.params;
 
-  const drinkById = await Cocktail.findById(id);
+  const parcelById = await Parcel.findById(id);
 
-  if (!drinkById) {
-    throw HttpError(404, "Sorry, there is no drink with such id");
+  if (!parcelById) {
+    throw HttpError(404, "Sorry, there is no parcel with such id");
   }
 
-  res.json(drinkById);
+  res.json(parcelById);
 };
 
 export default ctrlWrapper(getParcelById);

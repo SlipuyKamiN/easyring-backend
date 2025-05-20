@@ -23,7 +23,9 @@ const login = async (req, res) => {
     id: user._id,
   };
 
-  const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "23h" });
+  //{ expiresIn: "23h" }
+
+  const token = jwt.sign(payload, JWT_SECRET);
   await User.findByIdAndUpdate(user._id, { token }, { new: true });
 
   const currentTime = Date.now();
@@ -34,7 +36,7 @@ const login = async (req, res) => {
     _id: user._id,
     name: user.name,
     email: user.email,
-    avatarURL: user.avatarURL,
+    role: user.role,
     token,
     sinceSignUp,
   };

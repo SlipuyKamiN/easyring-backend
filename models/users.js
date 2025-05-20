@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-import { emailRegexp} from "../constants/user-constants.js";
+import { emailRegexp } from "../constants/user-constants.js";
 import { handleSaveError, handleUpdateValidate } from "./hooks.js";
 
 const userSchema = new Schema(
@@ -18,10 +18,10 @@ const userSchema = new Schema(
       required: [true, "Email is required"],
     },
     token: String,
-    avatarURL: String,
-    subscription: {
-      type: Boolean,
-      default: false,
+    role: {
+      type: String,
+      enum: ["admin", "driver"],
+      required: true,
     },
   },
   { versionKey: false, timestamps: true }

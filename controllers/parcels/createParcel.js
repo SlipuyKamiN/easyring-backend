@@ -1,41 +1,10 @@
-import { HttpError, ctrlWrapper } from "../../utils/index.js";
+import { ctrlWrapper, HttpError } from "../../utils/index.js";
 import Parcel from "../../models/parcels.js";
-import Setting from "../../models/settings.js";
 
 const createParcel = async (req, res) => {
-  const { _id: owner } = req.user;
-  const drinkThumb = req.file.path;
+  const result = await Parcel.create(req.body);
 
-  let { ingredients } = req.body;
-  const ingredientsArray = [];
-
-  for (const ingredient of ingredients) {
-    const ingredientData = await Setting.findOne({
-      title: ingredient.title,
-    });
-
-    if (!ingredientData) throw HttpError(404, "Wrong ingredient title");
-
-    const {
-      ingredientThumb,
-      "thumb-medium": thumbMedium,
-      "thumb-small": thumbSmall,
-    } = ingredientData;
-
-    ingredientsArray.push({
-      ingredientThumb,
-      thumbMedium,
-      thumbSmall,
-      ...ingredient,
-    });
-  }
-
-  const result = await Parcel.create({
-    ...req.body,
-    owner,
-    drinkThumb,
-    ingredients: ingredientsArray,
-  });
+  if (!result) HttpError(401, "Something went wrong");
 
   res.status(201).json(result);
 };

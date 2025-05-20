@@ -2,100 +2,126 @@ import { Schema, model } from "mongoose";
 
 import { handleSaveError, handleUpdateValidate } from "./hooks.js";
 
-// parcelSchema
 const parcelSchema = new Schema(
   {
-    drink: { type: String, required: [true, "Set name for a drink"] },
-    description: String,
-    drinkAlternate: String,
-    tags: [String],
-    video: String,
-    category: {
+    id: {
       type: String,
-      required: [true, "Set a category for a drink"],
-      enum: [
-        "Ordinary Drink",
-        "Cocktail",
-        "Shake",
-        "Other",
-        "Cocoa",
-        "Shot",
-        "Coffee / Tea",
-        "Homemade Liqueur",
-        "Punch / Party Drink",
-        "Beer",
-        "Soft Drink",
-      ],
+      required: true,
     },
-    IBA: String,
-    alcoholic: {
-      type: String,
-      enum: ["Alcoholic", "Non alcoholic"],
-    },
-    glass: {
-      type: String,
-      required: [true, "Glass type required"],
-      enum: [
-        "Highball glass",
-        "Cocktail glass",
-        "Old-fashioned glass",
-        "Whiskey Glass",
-        "Collins glass",
-        "Pousse cafe glass",
-        "Champagne flute",
-        "Whiskey sour glass",
-        "Cordial glass",
-        "Brandy snifter",
-        "White wine glass",
-        "Nick and Nora Glass",
-        "Hurricane glass",
-        "Coffee mug",
-        "Shot glass",
-        "Jar",
-        "Irish coffee cup",
-        "Punch bowl",
-        "Pitcher",
-        "Pint glass",
-        "Copper Mug",
-        "Wine Glass",
-        "Beer mug",
-        "Margarita / Coupette glass",
-        "Beer pilsner",
-        "Beer Glass",
-        "Parfait glass",
-        "Mason jar",
-        "Margarita glass",
-        "Martini Glass",
-        "Balloon Glass",
-        "Coupe Glass",
-      ],
-    },
-    instructions: {
-      type: Schema.Types.Mixed,
-      required: [true, "Instructions are required"],
-    },
-    instructionsES: String,
-    instructionsDE: String,
-    instructionsFR: String,
-    instructionsIT: String,
-    instructionsRU: String,
-    instructionsPL: String,
-    instructionsUK: String,
-    drinkThumb: String,
-    ingredients: [
-      {
-        title: String,
-        measure: String,
-        ingredientThumb: String,
-        thumbMedium: String,
-        thumbSmall: String,
+    mainInfo: {
+      size: {
+        type: String,
+        enum: ["S", "M", "L"],
+        required: true,
       },
-    ],
-    owner: {
-      type: Schema.Types.ObjectId,
-      ref: "user",
+      date: {
+        type: Date,
+        required: true,
+      },
+      startTime: {
+        type: Date,
+        required: true,
+      },
+      endTime: {
+        type: Date,
+        required: true,
+      },
+      description: {
+        type: String,
+      },
     },
-    users: [String],
+    sender: {
+      phone: {
+        type: String,
+        required: true,
+        match: /^\+49\d{10,15}$/,
+      },
+      name: {
+        type: String,
+        required: true,
+      },
+      address: {
+        street: { type: String, required: true },
+        city: { type: String, required: true },
+        country: { type: String, required: true },
+        postcode: { type: String, required: true },
+        lat: {
+          type: Number,
+          required: true,
+        },
+        lon: {
+          type: Number,
+          required: true,
+        },
+      },
+      email: {
+        type: String,
+        match: /.+@.+\..+/,
+      },
+      comment: {
+        type: String,
+      },
+    },
+    recipient: {
+      phone: {
+        type: String,
+        required: true,
+        match: /^\+49\d{10,15}$/,
+      },
+      name: {
+        type: String,
+        required: true,
+      },
+      address: {
+        street: { type: String, required: true },
+        city: { type: String, required: true },
+        country: { type: String, required: true },
+        postcode: { type: String, required: true },
+        lat: {
+          type: Number,
+          required: true,
+        },
+        lon: {
+          type: Number,
+          required: true,
+        },
+      },
+      comment: {
+        type: String,
+      },
+    },
+    tracking: {
+      history: [
+        {
+          status: { type: String, required: true },
+          statusCode: { type: String, required: true },
+          time: { type: Date, required: true },
+        },
+      ],
+      paymentInfo: {
+        price: {
+          type: String,
+          required: true,
+        },
+        paymentType: {
+          type: String,
+          enum: ["cash", "card", "online"],
+          required: true,
+        },
+        isPaid: {
+          type: Boolean,
+          required: true,
+        },
+        transactionId: {
+          type: String,
+          default: null,
+        },
+        transactionTime: {
+          type: Date,
+          default: null,
+        },
+      },
+    },
   },
   { versionKey: false, timestamps: true }
 );

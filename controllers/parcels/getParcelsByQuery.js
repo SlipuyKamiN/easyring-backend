@@ -1,5 +1,5 @@
 import { HttpError, ctrlWrapper } from "../../utils/index.js";
-import Cocktail from "../../models/parcels.js";
+import Parcel from "../../models/parcels.js";
 
 const getParcelsByQuery = async (req, res) => {
   const { search, category, ingredient, page = 1, limit = 8 } = req.query;
@@ -12,20 +12,22 @@ const getParcelsByQuery = async (req, res) => {
       $elemMatch: { title: ingredient },
     });
 
-  const totalHits = await Cocktail.countDocuments(query);
+  const totalHits = await Parcel.countDocuments(query);
   const pageNumber = parseInt(page);
   const skip = (pageNumber - 1) * limit;
 
-  const drinks = await Cocktail.find(query)
-    .sort({ createdAt: -1 })
-    .skip(skip)
-    .limit(limit);
+  // const parcel = await Parcel.find(query)
+  //   .sort({ createdAt: -1 })
+  //   .skip(skip)
+  //   .limit(limit);
 
-  if (drinks.length === 0) {
-    throw HttpError(404, "No drinks were found");
+  const parcels = await Parcel.find();
+
+  if (parcels.length === 0) {
+    throw HttpError(404, "No parcels were found");
   }
 
-  res.json({ totalHits, drinks });
+  res.json({ totalHits, parcels });
 };
 
 export default ctrlWrapper(getParcelsByQuery);

@@ -1,24 +1,25 @@
 import { ctrlWrapper, HttpError } from "../../utils/index.js";
-import Cocktail from "../../models/parcels.js";
+import Parcel from "../../models/parcels.js";
 
 const deleteParcel = async (req, res) => {
   const { id } = req.params;
-  const { _id: user } = req.user;
+  const { _id: user, role } = req.user;
 
-  const drink = await Cocktail.findById(id);
+  const parcel = await Parcel.findById(id);
 
-  if (!drink) {
-    throw HttpError(404, "Drink with such id was not found");
+  if (!parcel) {
+    throw HttpError(404, "Parcel with such id was not found");
   }
 
-  if (drink.owner.toString() !== user.toString()) {
-    throw HttpError(403, "You are not authorized to delete this recipe");
+  if (role !== "admin") {
+    throw HttpError(403, "You are not authorized to delete this parcel");
   }
 
-  const deletedDrink = await Cocktail.findByIdAndDelete(id);
+  const deletedParcel = await Parcel.findByIdAndDelete(id);
 
   res.json({
-    message: `${deletedDrink.drink} has been deleted`,
+    deletedParcel,
+    message: `Parcel id: ${deletedParcel.id} has been deleted`,
   });
 };
 

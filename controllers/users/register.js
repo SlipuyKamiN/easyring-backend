@@ -1,8 +1,6 @@
 import bcrypt from "bcryptjs";
-import gravatar from "gravatar";
 import User from "../../models/users.js";
-import { ctrlWrapper, HttpError} from "../../utils/index.js";
-
+import { ctrlWrapper, HttpError } from "../../utils/index.js";
 
 const register = async (req, res) => {
   const { email, password } = req.body;
@@ -14,17 +12,16 @@ const register = async (req, res) => {
 
   const hashPassword = await bcrypt.hash(password, 10);
 
-  const avatarURL = gravatar.url(email);
-
   const newUser = await User.create({
     ...req.body,
     password: hashPassword,
-    avatarURL,
+    role: "admin",
   });
 
   res.status(201).json({
     name: newUser.name,
     email: newUser.email,
+    role: newUser.role,
   });
 };
 

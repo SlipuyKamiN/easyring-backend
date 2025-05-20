@@ -31,8 +31,8 @@ router.patch("/:id", isValidId, updateParcel);
 
 router.get("/:id", isValidId, getParcelById);
 
-router.get("/", authenticate, getMyParcels);
-
 router.get("/", getParcelsByQuery);
+
+router.get("/", authenticate, getMyParcels);
 
 export default router;

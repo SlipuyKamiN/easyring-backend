@@ -3,20 +3,12 @@ import User from "../../models/users.js";
 
 const updateUser = async (req, res) => {
   const { _id } = req.user;
-  const { name } = req.body;
 
-  let updatedFields = { name };
-
-  if (req.file) {
-    updatedFields.avatarURL = req.file.path;
-  }
-
-  await User.findByIdAndUpdate(_id, updatedFields);
+  await User.findByIdAndUpdate(_id, { ...req.body });
 
   const updatedUser = await User.findById(_id);
-  const { avatarURL, name: updatedName } = updatedUser;
 
-  res.json({ avatarURL, name: updatedName });
+  res.status(200).json({ updatedUser, message: "User was updated" });
 };
 
 export default ctrlWrapper(updateUser);

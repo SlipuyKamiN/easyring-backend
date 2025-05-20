@@ -1,30 +1,20 @@
 import { ctrlWrapper } from "../../utils/index.js";
-import Cocktail from "../../models/parcels.js";
+import Parcel from "../../models/parcels.js";
 
-// updateParcel (for admin)
 const updateParcel = async (req, res) => {
   const { id } = req.params;
-  const { _id: user } = req.user;
 
-  const recipe = await Cocktail.findById(id);
+  const parcel = await Parcel.findById(id);
 
-  if (!recipe) {
-    return res.status(404).json({ error: "Drink with such id is not found" });
+  if (!parcel) {
+    return res.status(404).json({ error: "Parcel with such id was not found" });
   }
 
-  if (!recipe.users) {
-    recipe.users = [];
-  }
+  await Parcel.findByIdAndUpdate(id, { ...req.body });
 
-  const isFavorite = recipe.users.includes(user);
+  const updatedParcel = await Parcel.findById(id);
 
-  if (isFavorite) {
-    await Cocktail.findByIdAndUpdate(recipe._id, { $pull: { users: user } });
-    res.status(200).json({ message: `Removed ${recipe.drink} from favorites` });
-  } else {
-    await Cocktail.findByIdAndUpdate(recipe._id, { $push: { users: user } });
-    res.status(200).json({ message: `Added ${recipe.drink} to favorites` });
-  }
+  res.status(200).json({ updatedParcel, message: "Parcel updated" });
 };
 
 export default ctrlWrapper(updateParcel);
