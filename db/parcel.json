@@ -120,7 +120,13 @@
     },
     "tracking": {
       "id": "RR434493",
-      "history": []
+      "history": [
+        {
+          "statusName": "Created",
+          "status": 100,
+          "date": "2025-05-20T20:40:00+02:00"
+        }
+      ]
     },
     "payment": {
       "price": 20,
