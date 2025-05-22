@@ -1,67 +1,68 @@
 import Joi from "joi";
 
 const parcelSchema = Joi.object({
-  id: Joi.string().required(),
+  _id: Joi.string().optional(),
 
   mainInfo: Joi.object({
     size: Joi.string().valid("S", "M", "L").required(),
     date: Joi.date().iso().required(),
     startTime: Joi.date().iso().required(),
     endTime: Joi.date().iso().required(),
-    description: Joi.string().allow(""),
+    description: Joi.string().required(),
+    distance: Joi.number().required(),
   }).required(),
 
   sender: Joi.object({
     phone: Joi.string()
-      .pattern(/^\+49\d{10,15}$/)
+      .pattern(/^\+?[0-9]{10,15}$/)
       .required(),
     name: Joi.string().required(),
     address: Joi.object({
-      street: Joi.string().required(),
-      city: Joi.string().required(),
-      country: Joi.string().required(),
-      postcode: Joi.string().required(),
-      lat: Joi.number().required(),
-      lon: Joi.number().required(),
+      type: Joi.string().required(),
+      properties: Joi.object().required(),
+      geometry: Joi.object().required(),
+      bbox: Joi.array().items(Joi.number()).optional(),
     }).required(),
-    email: Joi.string().email(),
-    comment: Joi.string().allow(""),
+    email: Joi.string().email().required(),
+    comment: Joi.string().allow("").optional(),
   }).required(),
 
   recipient: Joi.object({
     phone: Joi.string()
-      .pattern(/^\+49\d{10,15}$/)
+      .pattern(/^\+?[0-9]{10,15}$/)
       .required(),
     name: Joi.string().required(),
     address: Joi.object({
-      street: Joi.string().required(),
-      city: Joi.string().required(),
-      country: Joi.string().required(),
-      postcode: Joi.string().required(),
-      lat: Joi.number().required(),
-      lon: Joi.number().required(),
+      type: Joi.string().required(),
+      properties: Joi.object().required(),
+      geometry: Joi.object().required(),
+      bbox: Joi.array().items(Joi.number()).optional(),
     }).required(),
-    comment: Joi.string().allow(""),
+    comment: Joi.string().allow("").optional(),
   }).required(),
 
   tracking: Joi.object({
     history: Joi.array()
       .items(
         Joi.object({
-          status: Joi.string().required(),
-          statusCode: Joi.string().required(),
-          time: Joi.date().iso().required(),
+          statusName: Joi.string().required(),
+          status: Joi.number().required(),
+          date: Joi.date().iso().required(),
         })
       )
       .required(),
+  }).required(),
 
-    paymentInfo: Joi.object({
-      price: Joi.string().required(),
-      paymentType: Joi.string().valid("cash", "card", "online").required(),
-      isPaid: Joi.boolean().required(),
-      transactionId: Joi.string().allow(null),
-      transactionTime: Joi.date().iso().allow(null),
-    }).required(),
+  payment: Joi.object({
+    price: Joi.number().required(),
+    type: Joi.string().valid("cash", "online").required(),
+    transactionDetails: Joi.object().required(),
+    isPaid: Joi.boolean().required(),
+  }).required(),
+
+  driver: Joi.object({
+    name: Joi.string().allow("").required(),
+    id: Joi.string().allow("").required(),
   }).required(),
 });
 

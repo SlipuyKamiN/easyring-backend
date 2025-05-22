@@ -33,6 +33,6 @@ router.get("/:id", isValidId, getParcelById);
 
 router.get("/", getParcelsByQuery);
 
-router.get("/", authenticate, getMyParcels);
+router.get("/", getMyParcels);
 
 export default router;

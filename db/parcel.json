@@ -1,12 +1,65 @@
-{
-  "newParcel": {
+[
+  {
+    "_id": "MM32000048",
     "mainInfo": {
       "size": "S",
       "date": "2025-05-22T00:00:00+02:00",
       "startTime": "2025-05-22T08:00:00+02:00",
       "endTime": "2025-05-22T11:00:00+02:00",
       "description": "Parcel description",
-      "distance": "8.08"
+      "distance": 8.08
+    },
+    "sender": {
+      "phone": "+491781516236",
+      "name": "Full Name",
+      "address": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {},
+        "bbox": []
+      },
+      "email": "email@gmail.com",
+      "comment": "Comment"
+    },
+    "recipient": {
+      "phone": "+491781516236",
+      "name": "Full Name",
+      "address": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {}
+      },
+      "comment": "Comment"
+    },
+    "tracking": {
+      "history": [
+        {
+          "statusName": "Created",
+          "status": 100,
+          "date": "2025-05-20T20:40:00+02:00"
+        }
+      ]
+    },
+    "payment": {
+      "price": 20,
+      "type": "cash",
+      "transactionDetails": {},
+      "isPaid": false
+    },
+    "driver": {
+      "name": "",
+      "id": ""
+    }
+  },
+  {
+    "_id": "MM32000048",
+    "mainInfo": {
+      "size": "S",
+      "date": "2025-05-22T00:00:00+02:00",
+      "startTime": "2025-05-22T08:00:00+02:00",
+      "endTime": "2025-05-22T11:00:00+02:00",
+      "description": "Parcel description",
+      "distance": 8.08
     },
     "sender": {
       "phone": "+491781516236",
@@ -119,7 +172,6 @@
       "comment": "Comment"
     },
     "tracking": {
-      "id": "RR434493",
       "history": [
         {
           "statusName": "Created",
@@ -136,8 +188,8 @@
       "isPaid": false
     },
     "driver": {
-      "driverName": "",
-      "driverId": ""
+      "name": "",
+      "id": ""
     }
   }
-}
+]
