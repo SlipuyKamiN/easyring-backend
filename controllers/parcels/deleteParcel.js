@@ -2,10 +2,10 @@ import { ctrlWrapper, HttpError } from "../../utils/index.js";
 import Parcel from "../../models/parcels.js";
 
 const deleteParcel = async (req, res) => {
-  const { id } = req.params;
-  const { _id: user, role } = req.user;
+  const { id: _id } = req.params;
+  const { role } = req.user;
 
-  const parcel = await Parcel.findById(id);
+  const parcel = await Parcel.findById(_id);
 
   if (!parcel) {
     throw HttpError(404, "Parcel with such id was not found");
@@ -15,11 +15,12 @@ const deleteParcel = async (req, res) => {
     throw HttpError(403, "You are not authorized to delete this parcel");
   }
 
-  const deletedParcel = await Parcel.findByIdAndDelete(id);
+  const deletedParcel = await Parcel.findByIdAndDelete(_id);
 
   res.json({
-    deletedParcel,
-    message: `Parcel id: ${deletedParcel.id} has been deleted`,
+    success: true,
+    data: deletedParcel,
+    message: `Parcel id: ${deletedParcel._id} has been deleted`,
   });
 };
 

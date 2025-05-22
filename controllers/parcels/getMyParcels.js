@@ -1,24 +1,18 @@
 import { ctrlWrapper } from "../../utils/index.js";
-import Cocktail from "../../models/parcels.js";
+import Parcel from "../../models/parcels.js";
 
-// getMyParcels (for driver)
 const getMyParcels = async (req, res) => {
-  const { _id: owner } = req.user;
-  const { page = 1, limit = 8, ...query } = req.query;
-  const skip = (page - 1) * limit;
+  const { _id: driver } = req.user;
 
-  const result = await Cocktail.find({ owner, ...query })
-    .sort({
-      createdAt: -1,
-    })
-    .skip(skip)
-    .limit(limit);
+  const result = await Parcel.find({ driver: { _id } });
 
   if (!result || result.length === 0) {
-    return res.status(404).json({ error: "No drinks were found" });
+    return res.status(404).json({ error: "No parcels were found" });
   }
 
-  const totalHits = await Cocktail.countDocuments({ owner: owner });
+  const totalHits = await Parcel.countDocuments({
+    driver: { _id: driver._id },
+  });
 
   res.json({ totalHits, result });
 };

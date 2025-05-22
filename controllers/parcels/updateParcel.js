@@ -2,19 +2,21 @@ import { ctrlWrapper } from "../../utils/index.js";
 import Parcel from "../../models/parcels.js";
 
 const updateParcel = async (req, res) => {
-  const { id } = req.params;
+  const { id: _id } = req.params;
 
-  const parcel = await Parcel.findById(id);
+  const parcel = await Parcel.findById(_id);
 
   if (!parcel) {
     return res.status(404).json({ error: "Parcel with such id was not found" });
   }
 
-  await Parcel.findByIdAndUpdate(id, { ...req.body });
+  const updatedParcel = await Parcel.findByIdAndUpdate(_id, req.body, {
+    new: true,
+  });
 
-  const updatedParcel = await Parcel.findById(id);
-
-  res.status(200).json({ updatedParcel, message: "Parcel updated" });
+  res
+    .status(200)
+    .json({ success: true, data: updatedParcel, message: "Parcel updated" });
 };
 
 export default ctrlWrapper(updateParcel);

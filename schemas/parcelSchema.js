@@ -66,6 +66,33 @@ const parcelSchema = Joi.object({
   }).required(),
 });
 
+const updateDriverSchema = Joi.object({
+  currentDriver: {
+    name: Joi.string().required(),
+    id: Joi.string().required(),
+  },
+}).required();
+
+const updatePaymentSchema = Joi.object({
+  currentPaymentData: {
+    price: Joi.number().required(),
+    type: Joi.string().valid("cash", "online").required(),
+    transactionDetails: Joi.object().required(),
+    isPaid: Joi.boolean().required(),
+  },
+}).required();
+
+const updateTrackingSchema = Joi.object({
+  currentStatus: {
+    statusName: Joi.string().required(),
+    status: Joi.number().required(),
+    date: Joi.date().iso().required(),
+  },
+}).required();
+
 export default {
   parcelSchema,
+  updateDriverSchema,
+  updatePaymentSchema,
+  updateTrackingSchema,
 };

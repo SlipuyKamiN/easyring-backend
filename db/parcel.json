@@ -183,8 +183,7 @@
     "payment": {
       "price": 20,
       "type": "cash",
-      "transactionId": "",
-      "transactionDate": "",
+      "transactionDetails": {},
       "isPaid": false
     },
     "driver": {
