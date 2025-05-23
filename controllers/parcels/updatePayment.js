@@ -3,7 +3,6 @@ import Parcel from "../../models/parcels.js";
 
 const updatePayment = async (req, res) => {
   const { id: _id } = req.params;
-  const { currentPaymentData } = req.body;
 
   const parcel = await Parcel.findById(_id);
 
@@ -13,19 +12,17 @@ const updatePayment = async (req, res) => {
 
   const updatedParcel = await Parcel.findByIdAndUpdate(
     _id,
-    { payment: currentPaymentData },
+    { payment: req.body },
     { new: true }
   );
 
   await Parcel.findById(_id);
 
-  res
-    .status(200)
-    .json({
-      success: true,
-      data: updatedParcel,
-      message: "Parcel payment data was updated",
-    });
+  res.status(200).json({
+    success: true,
+    data: updatedParcel,
+    message: "Parcel payment data was updated",
+  });
 };
 
 export default ctrlWrapper(updatePayment);

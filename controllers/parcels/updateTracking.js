@@ -3,7 +3,6 @@ import Parcel from "../../models/parcels.js";
 
 const updateTracking = async (req, res) => {
   const { id: _id } = req.params;
-  const { currentStatus } = req.body;
 
   const parcel = await Parcel.findById(_id);
 
@@ -14,18 +13,16 @@ const updateTracking = async (req, res) => {
   const updatedParcel = await Parcel.findByIdAndUpdate(
     _id,
     {
-      $push: { "tracking.history": currentStatus },
+      $push: { "tracking.history": req.body },
     },
     { new: true }
   );
 
-  res
-    .status(200)
-    .json({
-      success: true,
-      data: updatedParcel,
-      message: "Parcel tracking history was updated",
-    });
+  res.status(200).json({
+    success: true,
+    data: updatedParcel,
+    message: "Parcel tracking history was updated",
+  });
 };
 
 export default ctrlWrapper(updateTracking);

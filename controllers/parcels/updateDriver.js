@@ -3,7 +3,6 @@ import Parcel from "../../models/parcels.js";
 
 const updateDriver = async (req, res) => {
   const { id: _id } = req.params;
-  const { currentDriver } = req.body;
 
   const parcel = await Parcel.findById(_id);
 
@@ -13,17 +12,15 @@ const updateDriver = async (req, res) => {
 
   const updatedParcel = await Parcel.findByIdAndUpdate(
     _id,
-    { driver: currentDriver },
+    { driver: req.body },
     { new: true }
   );
 
-  res
-    .status(200)
-    .json({
-      success: true,
-      data: updatedParcel,
-      message: "Parcel driver was updated",
-    });
+  res.status(200).json({
+    success: true,
+    data: updatedParcel,
+    message: "Parcel driver was updated",
+  });
 };
 
 export default ctrlWrapper(updateDriver);

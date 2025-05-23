@@ -3,7 +3,7 @@ import Parcel from "../../models/parcels.js";
 import { customAlphabet } from "nanoid";
 
 const createParcel = async (req, res) => {
-  const parcelId = () => {
+  const generateParcelId = () => {
     const {
       mainInfo: { size },
     } = req.body;
@@ -14,7 +14,7 @@ const createParcel = async (req, res) => {
   };
 
   const result = await Parcel.create({
-    _id: parcelId(),
+    _id: generateParcelId(),
     ...req.body,
   });
 
