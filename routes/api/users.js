@@ -20,7 +20,12 @@ router.get("/current", authenticate, getCurrent);
 
 router.get("/users", authenticate, getAllUsers);
 
-router.patch("/user", authenticate, updateUser);
+router.patch(
+  "/user/:id",
+  authenticate,
+  validateBody(schemas.updateUserSchema),
+  updateUser
+);
 
 router.post("/logout", authenticate, logout);
 

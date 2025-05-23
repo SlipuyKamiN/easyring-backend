@@ -2,7 +2,6 @@ import express from "express";
 import {
   createParcel,
   deleteParcel,
-  getMyParcels,
   getParcelById,
   getParcelsByQuery,
   updateDriver,
@@ -56,7 +55,5 @@ router.patch(
 );
 
 router.get("/", getParcelsByQuery);
-
-router.get("/myParcels/", getMyParcels);
 
 export default router;

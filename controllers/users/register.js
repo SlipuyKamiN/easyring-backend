@@ -20,6 +20,8 @@ const register = async (req, res) => {
 
   res.status(201).json({
     name: newUser.name,
+    login: newUser.login,
+    phone: newUser.phone,
     email: newUser.email,
     role: newUser.role,
   });

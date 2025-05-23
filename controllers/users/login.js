@@ -7,16 +7,16 @@ import { HttpError, ctrlWrapper } from "../../utils/index.js";
 const { JWT_SECRET } = process.env;
 
 const login = async (req, res) => {
-  const { email, password } = req.body;
+  const { login, password } = req.body;
 
-  const user = await User.findOne({ email });
+  const user = await User.findOne({ login });
   if (!user) {
-    throw HttpError(401, "Email or password is wrong");
+    throw HttpError(401, "Login or password is wrong");
   }
 
   const passwordCompare = await bcrypt.compare(password, user.password);
   if (!passwordCompare) {
-    throw HttpError(401, "Email or password is wrong");
+    throw HttpError(401, "Login or password is wrong");
   }
 
   const payload = {
@@ -36,6 +36,8 @@ const login = async (req, res) => {
     _id: user._id,
     name: user.name,
     email: user.email,
+    carNumber: user.carNumber,
+    login: user.login,
     role: user.role,
     token,
     sinceSignUp,

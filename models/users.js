@@ -1,11 +1,23 @@
 import { Schema, model } from "mongoose";
-import { emailRegexp } from "../constants/user-constants.js";
+import {
+  carNumberRegexp,
+  emailRegexp,
+  loginRegexp,
+  phoneRegexp,
+} from "../constants/user-constants.js";
 import { handleSaveError, handleUpdateValidate } from "./hooks.js";
 
 const userSchema = new Schema(
   {
     name: {
       type: String,
+    },
+    login: {
+      type: String,
+      lowercase: true,
+      match: loginRegexp,
+      unique: true,
+      required: [true, "Login is required"],
     },
     password: {
       type: String,
@@ -22,6 +34,20 @@ const userSchema = new Schema(
       type: String,
       enum: ["admin", "driver"],
       required: true,
+    },
+    carNumber: {
+      type: String,
+      uppercase: true,
+      match: carNumberRegexp,
+      unique: true,
+      required: [true, "Car number is required"],
+    },
+    phone: {
+      type: String,
+      required: true,
+      required: [true, "Phone number is required"],
+      match: phoneRegexp,
+      unique: true,
     },
   },
   { versionKey: false, timestamps: true }

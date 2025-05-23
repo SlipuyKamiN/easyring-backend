@@ -1,27 +1,21 @@
 import { HttpError, ctrlWrapper } from "../../utils/index.js";
 import Parcel from "../../models/parcels.js";
+import { escapeRegex } from "../../helpers/escapeRegex.js";
 
 const getParcelsByQuery = async (req, res) => {
-  const { search, category, ingredient, page = 1, limit = 8 } = req.query;
+  const { search, date, driver } = req.query;
 
-  const query = {};
-  search && (query.drink = { $regex: search, $options: "i" });
-  category && (query.category = category);
-  ingredient &&
-    (query.ingredients = {
-      $elemMatch: { title: ingredient },
-    });
+  const query = {
+    ...(search && { _id: { $regex: escapeRegex(search), $options: "i" } }),
+    ...(date && { "mainInfo.date": date }),
+    ...(driver && { "driver.id": driver }),
+  };
 
   const totalHits = await Parcel.countDocuments(query);
-  const pageNumber = parseInt(page);
-  const skip = (pageNumber - 1) * limit;
 
-  // const parcel = await Parcel.find(query)
-  //   .sort({ createdAt: -1 })
-  //   .skip(skip)
-  //   .limit(limit);
-
-  const parcels = await Parcel.find();
+  const parcels = await Parcel.find(query).sort({
+    startTime: 1,
+  });
 
   if (parcels.length === 0) {
     throw HttpError(404, "No parcels were found");
