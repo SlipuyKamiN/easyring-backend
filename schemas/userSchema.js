@@ -82,7 +82,7 @@ const updateUserSchema = Joi.object({
     .min(6)
     .max(16)
     .pattern(passwordRegexp)
-    .required()
+    .optional()
     .messages({
       "string.min": "Password must be at least 6 characters",
       "string.max": "Password cannot be longer than 16 characters",
