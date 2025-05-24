@@ -24,6 +24,8 @@ router.get("/:id", isValidId, getParcelById);
 
 router.use(authenticate);
 
+router.get("/", getParcelsByQuery);
+
 router.delete("/:id", isValidId, deleteParcel);
 
 router.patch(
@@ -53,7 +55,5 @@ router.patch(
   validateBody(schemas.updateTrackingSchema),
   updateTracking
 );
-
-router.get("/", getParcelsByQuery);
 
 export default router;

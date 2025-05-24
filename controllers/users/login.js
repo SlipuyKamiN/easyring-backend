@@ -26,24 +26,9 @@ const login = async (req, res) => {
   //{ expiresIn: "23h" }
 
   const token = jwt.sign(payload, JWT_SECRET);
-  await User.findByIdAndUpdate(user._id, { token }, { new: true });
+  const data = await User.findByIdAndUpdate(user._id, { token }, { new: true });
 
-  const currentTime = Date.now();
-  const createdAt = user.createdAt.getTime();
-  const sinceSignUp = currentTime - createdAt;
-
-  const userData = {
-    _id: user._id,
-    name: user.name,
-    email: user.email,
-    carNumber: user.carNumber,
-    login: user.login,
-    role: user.role,
-    token,
-    sinceSignUp,
-  };
-
-  res.json(userData);
+  res.json({ success: true, data, message: "Sign in success" });
 };
 
 export default ctrlWrapper(login);

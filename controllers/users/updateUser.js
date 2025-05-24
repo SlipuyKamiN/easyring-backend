@@ -1,5 +1,6 @@
 import { ctrlWrapper } from "../../utils/index.js";
 import User from "../../models/users.js";
+import bcrypt from "bcryptjs/dist/bcrypt.js";
 
 const updateUser = async (req, res) => {
   const { id: _id } = req.params;
@@ -10,13 +11,18 @@ const updateUser = async (req, res) => {
     return res.status(404).json({ error: `User with id ${_id} was not found` });
   }
 
-  const updatedUser = await User.findByIdAndUpdate(_id, req.body, {
-    new: true,
-  });
+  const updatedBody = req.body;
 
-  res
-    .status(200)
-    .json({ success: true, data: updatedUser, message: "User was updated" });
+  if (updatedBody.password) {
+    const hashPassword = await bcrypt.hash(req.body.password, 10);
+    updatedBody.password = hashPassword;
+  }
+
+  const data = await User.findByIdAndUpdate(_id, updatedBody, {
+    new: true,
+  }).select("-password");
+
+  res.status(200).json({ success: true, data, message: "User was updated" });
 };
 
 export default ctrlWrapper(updateUser);

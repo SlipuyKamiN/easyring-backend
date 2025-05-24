@@ -51,7 +51,12 @@ const userSchema = new Schema(
     },
   },
   { versionKey: false, timestamps: true }
-);
+).set("toJSON", {
+  transform: (doc, ret, options) => {
+    delete ret.password;
+    return ret;
+  },
+});
 
 userSchema.pre("findByIdAndUpdate", handleUpdateValidate);
 

@@ -4,7 +4,7 @@ import { ctrlWrapper } from "../../utils/index.js";
 const getAllUsers = async (req, res) => {
   const totalHits = await User.countDocuments();
 
-  const users = await User.find().sort({
+  const users = await User.find().select("-password").sort({
     createdAt: 1,
   });
 

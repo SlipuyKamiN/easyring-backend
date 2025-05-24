@@ -1,15 +1,13 @@
+import User from "../../models/users.js";
 import { ctrlWrapper } from "../../utils/index.js";
 
-const getCurrent = (req, res) => {
-  const { _id, email, login, name, phone, role, token } = req.user;
+const getCurrent = async (req, res) => {
+  const data = req.user;
+
   res.json({
-    _id,
-    email,
-    login,
-    name,
-    phone,
-    token,
-    role,
+    success: true,
+    data,
+    message: "Current user data was found",
   });
 };
 

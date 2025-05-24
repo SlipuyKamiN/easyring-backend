@@ -6,6 +6,7 @@ import {
   logout,
   updateUser,
   getAllUsers,
+  deleteUser,
 } from "../../controllers/users/index.js";
 import schemas from "../../schemas/userSchema.js";
 import { validateBody, authenticate } from "../../middlewares/index.js";
@@ -26,6 +27,8 @@ router.patch(
   validateBody(schemas.updateUserSchema),
   updateUser
 );
+
+router.delete("/user/:id", authenticate, deleteUser);
 
 router.post("/logout", authenticate, logout);
 
