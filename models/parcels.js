@@ -58,7 +58,18 @@ const parcelSchema = new Schema(
 
     payment: {
       price: { type: Number, required: true },
-      type: { type: String, enum: ["cash", "online", null], required: true },
+      type: {
+        type: String,
+        enum: ["cash", "online", null],
+        required: true,
+        default: null,
+        validate: {
+          validator: function (v) {
+            return v === null || ["cash", "online"].includes(v);
+          },
+          message: (props) => `${props.value} is not a valid type!`,
+        },
+      },
       transactionDetails: { type: Object, required: true },
       isPaid: { type: Boolean, required: true },
     },
