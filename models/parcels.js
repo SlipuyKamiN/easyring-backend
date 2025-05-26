@@ -58,7 +58,7 @@ const parcelSchema = new Schema(
 
     payment: {
       price: { type: Number, required: true },
-      type: { type: String, enum: ["cash", "online"], required: true },
+      type: { type: String, enum: ["cash", "online", null], required: true },
       transactionDetails: { type: Object, required: true },
       isPaid: { type: Boolean, required: true },
     },
