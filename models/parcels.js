@@ -61,7 +61,6 @@ const parcelSchema = new Schema(
       type: {
         type: String,
         enum: ["cash", "online", null],
-        required: true,
         default: null,
         validate: {
           validator: function (v) {
