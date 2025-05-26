@@ -72,9 +72,9 @@ const updateDriverSchema = Joi.object({
 }).required();
 
 const updatePaymentSchema = Joi.object({
-  price: Joi.number().required(),
-  type: Joi.string().valid("cash", "online").required(),
-  transactionDetails: Joi.object().required(),
+  price: Joi.number().optional(),
+  type: Joi.string().valid("cash", "online").optional(),
+  transactionDetails: Joi.object().optional(),
   isPaid: Joi.boolean().required(),
 }).required();
 

@@ -22,6 +22,13 @@ router.post("/", validateBody(schemas.parcelSchema), createParcel);
 
 router.get("/:id", isValidId, getParcelById);
 
+router.patch(
+  "/update/payment/:id",
+  isValidId,
+  validateBody(schemas.updatePaymentSchema),
+  updatePayment
+);
+
 router.use(authenticate);
 
 router.get("/", getParcelsByQuery);
@@ -40,13 +47,6 @@ router.patch(
   isValidId,
   validateBody(schemas.updateDriverSchema),
   updateDriver
-);
-
-router.patch(
-  "/update/payment/:id",
-  isValidId,
-  validateBody(schemas.updatePaymentSchema),
-  updatePayment
 );
 
 router.patch(

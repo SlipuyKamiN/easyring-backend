@@ -10,9 +10,14 @@ const updatePayment = async (req, res) => {
     return res.status(404).json({ error: "Parcel with such id was not found" });
   }
 
+  const update = {};
+  for (const key in req.body) {
+    update[`payment.${key}`] = req.body[key];
+  }
+
   const updatedParcel = await Parcel.findByIdAndUpdate(
     _id,
-    { payment: req.body },
+    { $set: update },
     { new: true }
   );
 
