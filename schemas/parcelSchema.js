@@ -55,7 +55,7 @@ const parcelSchema = Joi.object({
 
   payment: Joi.object({
     price: Joi.number().required(),
-    type: Joi.string().valid("cash", "online").required(),
+    type: Joi.string().valid("cash", "online").allow(null).required(),
     transactionDetails: Joi.object().required(),
     isPaid: Joi.boolean().required(),
   }).required(),
