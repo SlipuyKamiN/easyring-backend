@@ -68,7 +68,7 @@ const parcelSchema = Joi.object({
 
 const updateDriverSchema = Joi.object({
   name: Joi.string().required(),
-  id: Joi.string().required(),
+  _id: Joi.string().required(),
 }).required();
 
 const updatePaymentSchema = Joi.object({

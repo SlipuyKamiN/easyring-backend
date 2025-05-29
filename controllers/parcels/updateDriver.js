@@ -4,10 +4,10 @@ import User from "../../models/users.js";
 
 const updateDriver = async (req, res) => {
   const { id: _id } = req.params;
-  const { id } = req.body;
+  const { _id: driverId } = req.body;
 
   const parcel = await Parcel.findById(_id);
-  const driver = await User.findById(id);
+  const driver = await User.findById(driverId);
 
   if (!parcel) {
     return res.status(404).json({ error: "Parcel with such id was not found" });
