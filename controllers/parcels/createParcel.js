@@ -15,16 +15,14 @@ const createParcel = async (req, res) => {
 
   const result = await Parcel.create({
     _id: generateParcelId(),
-    body: {
-      ...req.body,
-      ["tracking.history"]: [
-        {
-          statusName: "Created",
-          status: 100,
-          date: new Date(),
-        },
-      ],
-    },
+    ...req.body,
+    ["tracking.history"]: [
+      {
+        statusName: "Created",
+        status: 100,
+        date: new Date(),
+      },
+    ],
   });
 
   if (!result) HttpError(401, "Something went wrong");
