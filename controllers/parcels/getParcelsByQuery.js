@@ -8,7 +8,7 @@ const getParcelsByQuery = async (req, res) => {
   const query = {
     ...(search && { _id: { $regex: escapeRegex(search), $options: "i" } }),
     ...(date && { "mainInfo.date": date }),
-    ...(driver && { "driver.id": driver }),
+    ...(driver && { "driver._id": driver }),
   };
 
   const totalHits = await Parcel.countDocuments(query);

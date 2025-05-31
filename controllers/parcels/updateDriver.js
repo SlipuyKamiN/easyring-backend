@@ -14,8 +14,6 @@ const updateDriver = async (req, res) => {
   }
 
   if (!driver) {
-    console.log(driver);
-
     return res.status(404).json({ error: "Driver with such id was not found" });
   }
 
