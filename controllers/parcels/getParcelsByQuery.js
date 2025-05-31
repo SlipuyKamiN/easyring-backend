@@ -14,7 +14,7 @@ const getParcelsByQuery = async (req, res) => {
   const totalHits = await Parcel.countDocuments(query);
 
   const parcels = await Parcel.find(query).sort({
-    startTime: -1,
+    "mainInfo.startTime": 1,
   });
 
   if (parcels.length === 0) {
