@@ -1,0 +1,34 @@
+name: Deploy Backend
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Deploy to VPS
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.VPS_SSH_KEY }}
+          SSH_USER: root
+          VPS_HOST: 38.242.149.74
+          REMOTE_BACKEND_DIR: /var/www/easyring-backend
+        run: |
+          echo "$SSH_PRIVATE_KEY" > private_key.pem
+          chmod 600 private_key.pem
+          rsync -avz -e "ssh -i private_key.pem -o StrictHostKeyChecking=no" . $SSH_USER@$VPS_HOST:$REMOTE_BACKEND_DIR/
+          ssh -i private_key.pem -o StrictHostKeyChecking=no $SSH_USER@$VPS_HOST "pm2 restart easyring-backend || pm2 start server.js --name easyring-backend"
+          rm private_key.pem
