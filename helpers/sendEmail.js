@@ -1,22 +1,31 @@
 import nodemailer from "nodemailer";
 
-const { UKR_NET_EMAIL, UKR_NET_PASSWORD } = process.env;
+const { GMX_USER, GMX_PASS } = process.env;
 
-const nodemailerConfig = {
-  host: "smtp.ukr.net",
+const transporter = nodemailer.createTransport({
+  host: "mail.gmx.net",
   port: 465,
   secure: true,
   auth: {
-    user: UKR_NET_EMAIL,
-    pass: UKR_NET_PASSWORD,
+    user: GMX_USER,
+    pass: GMX_PASS,
   },
-};
+});
 
-const transport = nodemailer.createTransport(nodemailerConfig);
+const sendEmail = async ({ data, html }) => {
+  const mailOptions = {
+    from: "easyring.delivery@gmx.de",
+    to: data.to,
+    subject: data.subject,
+    html,
+  };
 
-const sendEmail = async (data) => {
-  const email = { ...data, from: UKR_NET_EMAIL };
-  return transport.sendMail(email);
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      return console.error("Error:", error);
+    }
+    console.log("Email has been sent:", info.response);
+  });
 };
 
 export default sendEmail;

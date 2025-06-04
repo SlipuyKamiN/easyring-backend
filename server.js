@@ -17,3 +17,8 @@ mongoose
     console.log(error.message);
     process.exit(1);
   });
+
+// sendEmail({
+//   data: { to: "mishayo53@gmail.com", subject: "qwe" },
+//   html: getConfirmationHTML({ parcel }),
+// });

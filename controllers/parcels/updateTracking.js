@@ -1,5 +1,7 @@
 import { ctrlWrapper } from "../../utils/index.js";
 import Parcel from "../../models/parcels.js";
+import sendEmail from "../../helpers/sendEmail.js";
+import { getConfirmationHTML } from "../../helpers/getConfirmationHTML.js";
 
 const updateTracking = async (req, res) => {
   const { id: _id } = req.params;
@@ -17,6 +19,16 @@ const updateTracking = async (req, res) => {
     },
     { new: true }
   );
+
+  console.log(req);
+
+  if (req.body.status === 200) {
+    const data = {
+      to: parcel.sender.email,
+      subject: `Pick-up confirmation ${parcel._id}`,
+    };
+    sendEmail({ data, html: getConfirmationHTML({ parcel, lang: "de" }) });
+  }
 
   res.status(200).json({
     success: true,
