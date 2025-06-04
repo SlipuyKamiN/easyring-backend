@@ -27,8 +27,8 @@ jobs:
           VPS_HOST: 38.242.149.74
           REMOTE_BACKEND_DIR: /var/www/easyring-backend
         run: |
-          echo "$SSH_PRIVATE_KEY" > private_key.pem
-          chmod 600 private_key.pem
-          rsync -avz -e "ssh -i private_key.pem -o StrictHostKeyChecking=no" . $SSH_USER@$VPS_HOST:$REMOTE_BACKEND_DIR/
-          ssh -i private_key.pem -o StrictHostKeyChecking=no $SSH_USER@$VPS_HOST "pm2 restart easyring-backend || pm2 start server.js --name easyring-backend"
-          rm private_key.pem
+          echo "$SSH_PRIVATE_KEY" > private_key
+          chmod 600 private_key
+          rsync -avz -e "ssh -i private_key -o StrictHostKeyChecking=no" . $SSH_USER@$VPS_HOST:$REMOTE_BACKEND_DIR/
+          ssh -i private_key -o StrictHostKeyChecking=no $SSH_USER@$VPS_HOST "pm2 restart easyring-backend || pm2 start server.js --name easyring-backend"
+          rm private_key
