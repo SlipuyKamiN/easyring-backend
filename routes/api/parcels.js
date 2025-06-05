@@ -14,17 +14,12 @@ import {
   validateBody,
   isValidId,
   authenticate,
-  notifyTracking,
+  notify,
 } from "../../middlewares/index.js";
 
 const router = express.Router();
 
-router.post(
-  "/",
-  validateBody(schemas.parcelSchema),
-  notifyTracking,
-  createParcel
-);
+router.post("/", validateBody(schemas.parcelSchema), notify, createParcel);
 
 router.get("/:id", isValidId, getParcelById);
 
@@ -59,6 +54,7 @@ router.patch(
   "/update/tracking/:id",
   isValidId,
   validateBody(schemas.updateTrackingSchema),
+  notify,
   updateTracking
 );
 

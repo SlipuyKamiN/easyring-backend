@@ -1,7 +1,7 @@
 import { sendEmail, HttpError, sendTelegram } from "../helpers/index.js";
 import { getConfirmationHTML } from "../helpers/getConfirmationHTML.js";
 
-const notifyTracking = (req, res, next) => {
+const notify = (req, res, next) => {
   const originalSend = res.send;
 
   res.send = function (body) {
@@ -29,7 +29,7 @@ const notifyTracking = (req, res, next) => {
         sendEmail({ data, html: getConfirmationHTML({ parcel, lang: "de" }) });
       }
     } catch (err) {
-      return next(HttpError(500, `notifyTracking error: ${err.message}`));
+      return next(HttpError(500, `Notifying error: ${err.message}`));
     }
 
     return originalSend.call(this, body);
@@ -38,4 +38,4 @@ const notifyTracking = (req, res, next) => {
   next();
 };
 
-export default notifyTracking;
+export default notify;
