@@ -62,7 +62,7 @@ const parcelSchema = Joi.object({
 
   driver: Joi.object({
     name: Joi.string().allow("").required(),
-    id: Joi.string().allow("").required(),
+    _id: Joi.string().allow("").required(),
   }).required(),
 });
 
