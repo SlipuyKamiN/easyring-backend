@@ -5,14 +5,15 @@ const notify = (req, res, next) => {
   const originalSend = res.send;
 
   res.send = function (body) {
-    let parcel;
     try {
-      parcel = typeof body === "string" ? JSON.parse(body) : body;
+      const { data: parcel } =
+        typeof body === "string" ? JSON.parse(body) : body;
 
       const history = parcel?.tracking?.history || [];
 
       if (!history.length) {
-        return originalSend.call(this, body);
+        return next(HttpError(400, `Tracking history is empty ${parcel._id}`));
+        // return originalSend.call(this, body);
       }
 
       const { status } = history[history.length - 1];
