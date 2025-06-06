@@ -18,9 +18,7 @@ const register = async (req, res) => {
     role: "driver",
   });
 
-  res
-    .status(201)
-    .json({ success: true, data: newUser, message: "New user was registered" });
+  res.status(201).json(newUser);
 };
 
 export default ctrlWrapper(register);

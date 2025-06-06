@@ -11,7 +11,7 @@ const getParcelById = async (req, res) => {
     throw HttpError(404, "Sorry, there is no parcel with such id");
   }
 
-  res.json(parcelById);
+  res.status(200).json(parcelById);
 };
 
 export default ctrlWrapper(getParcelById);

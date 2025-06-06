@@ -17,11 +17,7 @@ const deleteParcel = async (req, res) => {
 
   const deletedParcel = await Parcel.findByIdAndDelete(_id);
 
-  res.json({
-    success: true,
-    data: deletedParcel,
-    message: `Parcel id: ${deletedParcel._id} has been deleted`,
-  });
+  res.status(200).json(deletedParcel);
 };
 
 export default ctrlWrapper(deleteParcel);

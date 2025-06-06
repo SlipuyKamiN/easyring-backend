@@ -14,9 +14,7 @@ const updateParcel = async (req, res) => {
     new: true,
   });
 
-  res
-    .status(200)
-    .json({ success: true, data: updatedParcel, message: "Parcel updated" });
+  res.status(200).json(updatedParcel);
 };
 
 export default ctrlWrapper(updateParcel);

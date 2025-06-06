@@ -21,7 +21,7 @@ const getParcelsByQuery = async (req, res) => {
     throw HttpError(404, "No parcels were found");
   }
 
-  res.json({ totalHits, parcels });
+  res.status(200).json({ totalHits, parcels });
 };
 
 export default ctrlWrapper(getParcelsByQuery);

@@ -18,11 +18,7 @@ const updateTracking = async (req, res) => {
     { new: true }
   );
 
-  res.status(200).json({
-    success: true,
-    data: updatedParcel,
-    message: "Parcel tracking history was updated",
-  });
+  res.status(200).json(updatedParcel);
 };
 
 export default ctrlWrapper(updateTracking);

@@ -22,7 +22,7 @@ const updateUser = async (req, res) => {
     new: true,
   }).select("-password");
 
-  res.status(200).json({ success: true, data, message: "User was updated" });
+  res.status(200).json(data);
 };
 
 export default ctrlWrapper(updateUser);

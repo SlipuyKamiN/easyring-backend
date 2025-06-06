@@ -24,11 +24,7 @@ const deleteUser = async (req, res) => {
 
   const data = await User.findByIdAndDelete(id);
 
-  res.json({
-    success: true,
-    data,
-    message: `User id: ${data._id} has been deleted`,
-  });
+  res.status(200).json(data);
 };
 
 export default ctrlWrapper(deleteUser);

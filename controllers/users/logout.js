@@ -6,11 +6,6 @@ const logout = async (req, res) => {
 
   await User.findByIdAndUpdate(_id, { token: "" });
 
-  res.json({
-    success: true,
-    data: null,
-    message: "Logout success",
-  });
+  res.status(204).json("Logout success");
 };
-
 export default ctrlWrapper(logout);

@@ -12,7 +12,7 @@ const getAllUsers = async (req, res) => {
     throw HttpError(404, "No users were found");
   }
 
-  res.json({ totalHits, users });
+  res.status(200).json({ totalHits, users });
 };
 
 export default ctrlWrapper(getAllUsers);

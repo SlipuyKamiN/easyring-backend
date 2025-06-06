@@ -23,11 +23,7 @@ const updatePayment = async (req, res) => {
 
   await Parcel.findById(_id);
 
-  res.status(200).json({
-    success: true,
-    data: updatedParcel,
-    message: "Parcel payment data was updated",
-  });
+  res.status(200).json(updatedParcel);
 };
 
 export default ctrlWrapper(updatePayment);

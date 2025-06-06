@@ -4,11 +4,7 @@ import { ctrlWrapper } from "../../utils/index.js";
 const getCurrent = async (req, res) => {
   const data = req.user;
 
-  res.json({
-    success: true,
-    data,
-    message: "Current user data was found",
-  });
+  res.status(200).json(data);
 };
 
 export default ctrlWrapper(getCurrent);

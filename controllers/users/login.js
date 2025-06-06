@@ -28,7 +28,7 @@ const login = async (req, res) => {
   const token = jwt.sign(payload, JWT_SECRET);
   const data = await User.findByIdAndUpdate(user._id, { token }, { new: true });
 
-  res.json({ success: true, data, message: "Sign in success" });
+  res.status(200).json(data);
 };
 
 export default ctrlWrapper(login);

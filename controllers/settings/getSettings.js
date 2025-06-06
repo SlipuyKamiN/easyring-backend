@@ -8,7 +8,7 @@ const getSettings = async (req, res) => {
   if (!settings) {
     throw HttpError(404, "Sorry, there are no settings to display");
   }
-  res.json(settings);
+  res.status(200).json(settings);
 };
 
 export default ctrlWrapper(getSettings);

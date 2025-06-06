@@ -23,11 +23,7 @@ const updateDriver = async (req, res) => {
     { new: true }
   );
 
-  res.status(200).json({
-    success: true,
-    data: updatedParcel,
-    message: "Parcel driver was updated",
-  });
+  res.status(200).json(updatedParcel);
 };
 
 export default ctrlWrapper(updateDriver);
