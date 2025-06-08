@@ -1,7 +1,7 @@
 import { ctrlWrapper, HttpError } from "../../utils/index.js";
 import Stripe from "stripe";
 
-const STRIPE_SECRET = process.env;
+const { STRIPE_SECRET } = process.env;
 
 const stripe = new Stripe(STRIPE_SECRET);
 
