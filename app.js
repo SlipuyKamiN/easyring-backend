@@ -5,8 +5,10 @@ import fs from "fs/promises";
 import usersRouter from "./routes/api/users.js";
 import parcelsRouter from "./routes/api/parcels.js";
 import settingsRouter from "./routes/api/settings.js";
+import stripeRouter from "./routes/stripe/stripe.js";
 import swaggerUi from "swagger-ui-express";
 import path from "path";
+import sendTelegram from "./helpers/sendTelegram.js";
 
 const swaggerPath = path.resolve("", "swagger.json");
 const swaggerDocument = JSON.parse(await fs.readFile(swaggerPath));
@@ -23,6 +25,7 @@ app.use(express.static("public"));
 app.use("/api/auth", usersRouter);
 app.use("/api/parcels", parcelsRouter);
 app.use("/api/settings", settingsRouter);
+app.use("/stripe", stripeRouter);
 app.use("/api/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use((req, res) => {
@@ -33,6 +36,7 @@ app.use((err, req, res, next) => {
   const { status = 500, message = "Server error" } = err;
 
   console.log(err);
+  sendTelegram(err);
 
   res.status(status).json({ message });
 });
