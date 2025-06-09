@@ -55,7 +55,7 @@ const parcelSchema = Joi.object({
 
   payment: Joi.object({
     price: Joi.number().required(),
-    type: Joi.string().valid("cash", "online").allow(null).required(),
+    type: Joi.string().valid("cash", "stripe").allow(null).required(),
     transactionDetails: Joi.object().required(),
     isPaid: Joi.boolean().required(),
   }).required(),
@@ -73,7 +73,7 @@ const updateDriverSchema = Joi.object({
 
 const updatePaymentSchema = Joi.object({
   price: Joi.number().optional(),
-  type: Joi.string().valid("cash", "online").optional(),
+  type: Joi.string().valid("cash", "stripe").optional(),
   transactionDetails: Joi.object().optional(),
   isPaid: Joi.boolean().required(),
 }).required();
