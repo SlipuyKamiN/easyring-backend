@@ -11,8 +11,6 @@ const createCheckout = async (req, res) => {
   const session = await stripe.checkout.sessions.create({
     payment_method_types: [
       "card",
-      "apple_pay",
-      "google_pay",
       "klarna",
       "paypal",
     ],
