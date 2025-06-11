@@ -1,5 +1,6 @@
-import { sendEmail, HttpError, sendTelegram } from "../helpers/index.js";
+import { sendEmail, sendTelegram } from "../helpers/index.js";
 import { getConfirmationHTML } from "../helpers/getConfirmationHTML.js";
+import { HttpError } from "../utils/index.js";
 
 const notify = (req, res, next) => {
   const originalSend = res.send;

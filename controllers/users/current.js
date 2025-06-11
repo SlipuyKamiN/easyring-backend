@@ -1,4 +1,3 @@
-import User from "../../models/users.js";
 import { ctrlWrapper } from "../../utils/index.js";
 
 const getCurrent = async (req, res) => {

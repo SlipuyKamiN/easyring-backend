@@ -8,7 +8,6 @@ import settingsRouter from "./routes/api/settings.js";
 import stripeRouter from "./routes/stripe/stripe.js";
 import swaggerUi from "swagger-ui-express";
 import path from "path";
-import sendTelegram from "./helpers/sendTelegram.js";
 
 const swaggerPath = path.resolve("", "swagger.json");
 const swaggerDocument = JSON.parse(await fs.readFile(swaggerPath));
@@ -36,7 +35,6 @@ app.use((err, req, res, next) => {
   const { status = 500, message = "Server error" } = err;
 
   console.log(err);
-  sendTelegram(err);
 
   res.status(status).json({ message });
 });

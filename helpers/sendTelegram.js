@@ -1,6 +1,6 @@
 import axios from "axios";
 import { format } from "date-fns";
-import { HttpError } from "./index.js";
+import { HttpError } from "../utils/index.js";
 
 const { TELEGRAM_TOKEN, TELEGRAM_CHAT_ID } = process.env;
 
