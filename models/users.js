@@ -32,8 +32,14 @@ const userSchema = new Schema(
     token: String,
     role: {
       type: String,
-      enum: ["admin", "driver"],
-      required: true,
+      enum: ["admin", "driver", null],
+      default: null,
+      validate: {
+        validator: function (v) {
+          return v === null || ["admin", "driver"].includes(v);
+        },
+        message: (props) => `${props.value} is not a valid role!`,
+      },
     },
     carNumber: {
       type: String,

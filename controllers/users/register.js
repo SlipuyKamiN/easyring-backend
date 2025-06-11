@@ -15,7 +15,7 @@ const register = async (req, res) => {
   const newUser = await User.create({
     ...req.body,
     password: hashPassword,
-    role: "driver",
+    role: null,
   });
 
   res.status(201).json(newUser);
