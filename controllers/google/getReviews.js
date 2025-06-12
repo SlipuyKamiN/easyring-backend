@@ -18,13 +18,11 @@ const getReviews = async (req, res) => {
       }
     );
 
-    res.status(200).json(data);
+    res.status(200).json(data.data);
   } catch (error) {
-    if (error) {
-      throw HttpError(400, error.message);
-    }
-
-    throw HttpError(500, error.message);
+    const status = error.response?.status || 500;
+    const message = error.response?.data?.error_message || error.message;
+    throw HttpError(status, message);
   }
 };
 
