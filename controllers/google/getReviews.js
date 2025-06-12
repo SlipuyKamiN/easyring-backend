@@ -3,7 +3,7 @@ import { ctrlWrapper, HttpError } from "../../utils/index.js";
 
 const { GOOGLE_PLACES_API } = process.env;
 
-const getSession = async (req, res) => {
+const getReviews = async (req, res) => {
   const { placeID } = req.params;
 
   try {
@@ -28,4 +28,4 @@ const getSession = async (req, res) => {
   }
 };
 
-export default ctrlWrapper(getSession);
+export default ctrlWrapper(getReviews);

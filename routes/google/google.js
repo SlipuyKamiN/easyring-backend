@@ -1,5 +1,5 @@
 import express from "express";
-import getReviews from "../../controllers/google/getReviews";
+import getReviews from "../../controllers/google/getReviews.js";
 
 const router = express.Router();
 
