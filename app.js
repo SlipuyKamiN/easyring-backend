@@ -6,6 +6,7 @@ import usersRouter from "./routes/api/users.js";
 import parcelsRouter from "./routes/api/parcels.js";
 import settingsRouter from "./routes/api/settings.js";
 import stripeRouter from "./routes/stripe/stripe.js";
+import googleRouter from "./routes/google/google.js";
 import swaggerUi from "swagger-ui-express";
 import path from "path";
 
@@ -24,6 +25,7 @@ app.use(express.static("public"));
 app.use("/api/auth", usersRouter);
 app.use("/api/parcels", parcelsRouter);
 app.use("/api/settings", settingsRouter);
+app.use("/api/google", googleRouter);
 app.use("/stripe", stripeRouter);
 app.use("/api/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 

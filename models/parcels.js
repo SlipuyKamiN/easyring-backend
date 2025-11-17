@@ -27,7 +27,7 @@ const parcelSchema = new Schema(
         geometry: { type: Object, default: {} },
         bbox: { type: [Number], default: [] },
       },
-      email: { type: String, required: true },
+      email: { type: String },
       comment: { type: String },
     },
 
