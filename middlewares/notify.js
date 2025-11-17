@@ -22,7 +22,7 @@ const notify = (req, res, next) => {
         sendTelegram(parcel, "notification");
       }
 
-      if (status === 200) {
+      if (status === 200 && parcel.sender.email) {
         const data = {
           to: parcel.sender.email,
           subject: `Pick-up confirmation ${parcel._id}`,

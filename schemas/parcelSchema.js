@@ -23,7 +23,7 @@ const parcelSchema = Joi.object({
       geometry: Joi.object().required(),
       bbox: Joi.array().items(Joi.number()).optional(),
     }).required(),
-    email: Joi.string().email().required(),
+    email: Joi.string().email().allow("").optional(),
     comment: Joi.string().allow("").optional(),
   }).required(),
 
